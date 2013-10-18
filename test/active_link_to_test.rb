@@ -150,6 +150,14 @@ class ActiveLinkToTest < Test::Unit::TestCase
     assert_equal ({:class => 'testing', :active => :inclusive }), params
   end
 
+  def test_should_ignore_https_domain
+    request.fullpath = '/root'
+    request.protocol = 'https://'
+    request.host_with_port = 'sub.test:80'
+    link = active_link_to 'label', 'https://sub.test:80/root'
+    assert_equal link_to('label', 'https://sub.test:80/root', {:class => 'active'}), link
+  end
+
   def test_no_empty_class_attribute
     request.fullpath = '/root'
     link = active_link_to('label', '/root', :wrap_tag => :li)

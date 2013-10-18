@@ -73,6 +73,7 @@ module ActiveLinkTo
   #
   def is_active_link?(url, condition = nil)
     url = url_for(url).sub(/\?.*/, '') # ignore GET params
+    url = url.sub(/^#{request.protocol}#{request.host_with_port}/, '') #Add support for full url
     case condition
     when :inclusive, nil
       !request.fullpath.match(/^#{Regexp.escape(url).chomp('/')}(\/.*|\?.*)?$/).blank?
