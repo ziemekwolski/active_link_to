@@ -103,6 +103,13 @@ If you are constructing navigation menu it might be helpful to wrap links in ano
 active_link_to 'Users', users_path, :wrap_tag => :li
 # => <li class="active"><a href="/users">Users</a></li>
 ```
+
+Also supports full urls:
+
+```ruby
+active_link_to 'Users', users_url, :wrap_tag => :li
+# => <li class="active"><a href="https://test.com/users">Users</a></li>
+```
     
 ## Helper Methods
 You may directly use methods that `active_link_to` relies on. 
