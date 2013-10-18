@@ -127,13 +127,13 @@ class ActiveLinkToTest < Test::Unit::TestCase
   def test_active_link_to_with_wrap_tag
     request.fullpath = '/root'
     link = active_link_to('label', '/root', :wrap_tag => :li)
-    assert_equal content_tag(:li, link_to('label', '/root', {:class => "active"}), {:class => "active"}), link
+    assert_equal content_tag(:li, link_to('label', '/root', {:class => 'active'}), {:class => 'active'}), link
 
     link = active_link_to('label', '/root', :wrap_tag => :li, :active_disable => true)
-    assert_equal content_tag(:li, content_tag(:span,'label', {:class => "active"}), {:class => "active"}), link
+    assert_equal content_tag(:li, content_tag(:span,'label', {:class => 'active'}), {:class => 'active'}), link
 
     link = active_link_to('label', '/root', :wrap_tag => :li, :class => 'testing')
-    assert_equal content_tag(:li, link_to('label', '/root', {:class => "testing active"}), {:class => "testing active"}), link
+    assert_equal content_tag(:li, link_to('label', '/root', {:class => 'testing active'}), {:class => 'testing active'}), link
   end
 
   def test_active_link_to_with_active_disable
@@ -145,8 +145,8 @@ class ActiveLinkToTest < Test::Unit::TestCase
   def test_should_not_modify_passed_params
     request.fullpath = '/root'
     params = { :class => 'testing', :active => :inclusive }
-    out = active_link_to 'label', '/root', params
-    assert_equal link_to('label', '/root', {:class => "testing active"}), out
+    link = active_link_to 'label', '/root', params
+    assert_equal link_to('label', '/root', {:class => 'testing active'}), link
     assert_equal ({:class => 'testing', :active => :inclusive }), params
   end
 
@@ -161,7 +161,7 @@ class ActiveLinkToTest < Test::Unit::TestCase
   def test_no_empty_class_attribute
     request.fullpath = '/root'
     link = active_link_to('label', '/root', :wrap_tag => :li)
-    assert_equal content_tag(:li, link_to('label', '/root', {:class => "active"}),{:class => "active"}), link
+    assert_equal content_tag(:li, link_to('label', '/root', {:class => 'active'}),{:class => 'active'}), link
 
     link = active_link_to('label', '/other', :wrap_tag => :li)
     assert_equal content_tag(:li, link_to('label', '/other')), link
